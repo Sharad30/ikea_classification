@@ -1,4 +1,4 @@
-from src.architechture import classifier_pretrained
+from src.architecture import classifier_pretrained
 from src.datapipe import get_all_data_generators
 from src.monitor import callbacks
 import config.config as cfg
