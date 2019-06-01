@@ -1,7 +1,6 @@
 import fastai
 from fastai import *
 from fastai.vision import *
-from src.preprocess import load_all_data, load_test_data
 import config.config as cfg
 
 def get_all_data_generators():
