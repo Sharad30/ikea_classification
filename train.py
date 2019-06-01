@@ -5,7 +5,7 @@ import os
 
 def do_train():
     filepath = os.path.join("model", cfg.EXPERIMENT_LABEL+cfg.BASE_MODEL+".h5")
-    data = get_all_data_generator()
+    data = get_all_data_generators()
     model = classifier_pretrained(data)
     
     learn.fit_one_cycle(cfg.EPOCHS, 1e-3)
