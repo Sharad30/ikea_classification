@@ -3,6 +3,36 @@ from fastai import *
 from fastai.vision import *
 import config.config as cfg
 
+def load_pretrained_weights(data, pretrained_model):
+    if cfg.BASE_MODEL == 'densenet121':
+        model = cnn_learner(data, models.densenet121, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+    elif cfg.BASE_MODEL == 'densenet169':
+        model = cnn_learner(data, models.densenet169, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+    elif cfg.BASE_MODEL == 'densenet201':
+        model = cnn_learner(data, models.densenet201, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+    elif cfg.BASE_MODEL == 'resnet50':
+        model = cnn_learner(data, models.resnet50, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+    elif cfg.BASE_MODEL == 'resnet101':
+        model = cnn_learner(data, models.resnet101, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+    elif cfg.BASE_MODEL == 'resnet152':
+        model = cnn_learner(data, models.resnet152, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+    elif cfg.BASE_MODEL == 'vgg16':
+        model = cnn_learner(data, models.vgg16_bn, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+    elif cfg.BASE_MODEL == 'vgg19':
+        model = cnn_learner(data, models.vgg19_bn, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+    elif cfg.BASE_MODEL == 'xception':
+        model = cnn_learner(data, models.xception, metrics=accuracy).\
+                load(f'../../models/{pretrained_model}')
+
+    return model
 
 def create_pretrained_model(data):
     if cfg.BASE_MODEL == 'densenet121':
@@ -42,7 +72,11 @@ def create_pretrained_model(data):
 
     return model
 
-def classifier_pretrained(data):
-
-    pretrained_model = create_pretrained_model(data)
-    return pretrained_model
+def classifier_pretrained(data, model, pretrained):
+    if pretrained:
+        pretrained_model = load_pretrained_weights(data, model)
+        return pretrained_model
+    else:
+        pretrained_model = create_pretrained_model(data)
+        return pretrained_model
+        
