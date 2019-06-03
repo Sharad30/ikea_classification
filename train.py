@@ -9,7 +9,7 @@ from src.monitor import get_callbacks
 def do_train():
     filepath = '../../models/'+cfg.EXPERIMENT_LABEL+'_'+cfg.BASE_MODEL
     data = get_all_data_generators()
-    learn = classifier_pretrained(data)
+    learn = classifier_pretrained(data, cfg.PRETRAINED_MODEL_PATH, cfg.PRETRAINED)
     callbacks = get_callbacks(learn)
     ImageFile.LOAD_TRUNCATED_IMAGES = True
     with progress_disabled_ctx(learn) as learn:
