@@ -13,9 +13,9 @@ def do_train():
     callbacks = get_callbacks(learn)
     ImageFile.LOAD_TRUNCATED_IMAGES = True
     with progress_disabled_ctx(learn) as learn:
-      learn.fit_one_cycle(cfg.EPOCHS, 1e-3, callbacks=callbacks)
+      learn.fit_one_cycle(cfg.EPOCHS, cfg.LEARNING_RATE, callbacks=callbacks)
       logs_df = learn.csv_logger.read_logged_file()
-      logs_df.to_csv(f'{cfg.EXPERIMENT_LABEL}_{cfg.BASE_MODEL}.csv')
+      logs_df.to_csv(f'logs/{cfg.EXPERIMENT_LABEL}_{cfg.BASE_MODEL}.csv')
       learn.save(filepath)
 
 
