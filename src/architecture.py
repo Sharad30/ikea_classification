@@ -36,23 +36,23 @@ def load_pretrained_weights(data, pretrained_model):
 
 def create_pretrained_model(data):
     if cfg.BASE_MODEL == 'densenet121':
-        model = cnn_learner(data, models.densenet121, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.densenet121, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     elif cfg.BASE_MODEL == 'densenet169':
-        model = cnn_learner(data, models.densenet169, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.densenet169, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     elif cfg.BASE_MODEL == 'densenet201':
-        model = cnn_learner(data, models.densenet201, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.densenet201, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     elif cfg.BASE_MODEL == 'resnet50':
-        model = cnn_learner(data, models.resnet50, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.resnet50, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     elif cfg.BASE_MODEL == 'resnet101':
-        model = cnn_learner(data, models.resnet101, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.resnet101, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     elif cfg.BASE_MODEL == 'resnet152':
-        model = cnn_learner(data, models.resnet152, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.resnet152, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     elif cfg.BASE_MODEL == 'vgg16':
-        model = cnn_learner(data, models.vgg16_bn, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.vgg16_bn, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     elif cfg.BASE_MODEL == 'vgg19':
-        model = cnn_learner(data, models.vgg19_bn, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.vgg19_bn, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     elif cfg.BASE_MODEL == 'xception':
-        model = cnn_learner(data, models.xception, pretrained=cfg.PRETRAINED, metrics=accuracy)
+        model = cnn_learner(data, models.xception, pretrained=cfg.PRETRAINED_IMAGENET, metrics=accuracy)
     else:
         print("fastai doesn't have the pretrained weights for it")
         print("""
