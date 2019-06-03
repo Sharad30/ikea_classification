@@ -9,7 +9,7 @@ def get_callbacks(model):
     return callbacks
 
 def get_lr_plot(pretrained_model=False):
-    if pretrained_model == False:
+    if pretrained_model==False:
         data = get_all_data_generators()
         learn = classifier_pretrained(data)
         ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -17,7 +17,7 @@ def get_lr_plot(pretrained_model=False):
         return learn.recorder.plot(suggestion=True)
     else:
         data = get_all_data_generators()
-        model = classifier_pretrained(data)
+        model = classifier_pretrained(data, pretrained_model, True)
         learn = model.load(f'../../models/{pretrained_model}')
         ImageFile.LOAD_TRUNCATED_IMAGES = True
         learn.lr_find()
