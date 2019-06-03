@@ -8,10 +8,17 @@ def get_callbacks(model):
     callbacks = [csv_logger]
     return callbacks
 
-def get_lr_plot():
-    data = get_all_data_generators()
-    learn = classifier_pretrained(data)
-    ImageFile.LOAD_TRUNCATED_IMAGES = True
-    learn.lr_find()
-    
-    return learn.recorder.plot(suggestion=True)
+def get_lr_plot(pretrained_model=False):
+    if pretrained_model == False:
+        data = get_all_data_generators()
+        learn = classifier_pretrained(data)
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
+        learn.lr_find()
+        return learn.recorder.plot(suggestion=True)
+    else:
+        data = get_all_data_generators()
+        model = classifier_pretrained(data)
+        learn = model.load(f'../../models/{pretrained_model}')
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
+        learn.lr_find()
+        return learn.recorder.plot(suggestion=True)
