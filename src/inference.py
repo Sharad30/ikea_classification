@@ -1,6 +1,8 @@
 import fastai
 from fastai import *
 from fastai.vision import *
+import pandas as pd
+import numpy as np
 
 def predict_test(model):
     ds_type = DatasetType.Test
