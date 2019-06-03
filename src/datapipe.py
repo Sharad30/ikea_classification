@@ -19,7 +19,7 @@ def get_all_data_generators():
     Returns:
         train_datagen, val_datagen, test_datagen -- three datagenerators
     """
-    random_seed(42, True)
+    random_seed(cfg.RANDOM_SEED, True)
     data = ImageDataBunch.from_folder(cfg.BASE_IMG_DIR, train= cfg.TRAIN_PATH, valid_pct= 0.1, test= cfg.TEST_PATH, bs=cfg.BATCH_SIZE,
                                   ds_tfms=get_transforms(), size=cfg.IMAGE_DIMS, num_workers=1)\
                                   .normalize(imagenet_stats)
