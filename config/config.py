@@ -3,8 +3,10 @@ TRAIN_PATH = 'train'
 TEST_PATH = 'test'
 
 BASE_IMG_DIR = 'data/'
-GENERATOR_RANDOM_SEED = 42
+RANDOM_SEED = 42
+
 PRETRAINED = False
+PRETRAINED_MODEL_PATH = 'without_pretrained_vgg16'
 
 LEARNING_RATE = 3.98E-04
 
