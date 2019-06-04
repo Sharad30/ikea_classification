@@ -23,7 +23,7 @@ def get_all_data_generators():
         data = ImageDataBunch.from_csv(path=cfg.BASE_IMG_DIR, folder=cfg.TRAIN_PATH, 
                                       csv_labels=cfg.TRAIN_CSV_PATH, 
                                       label_col=1, bs=32, test=cfg.TEST_PATH, 
-                                      ds_tfms=get_transforms(), size=224, num_workers=1).\
+                                      ds_tfms=get_transforms(), size=224, valid_pct=0.1, num_workers=1).\
                                       normalize(imagenet_stats)
 
         return data
