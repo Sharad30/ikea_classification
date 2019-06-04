@@ -2,6 +2,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 import requests
 import json
+import click
 
 def scrape_images(product_name, start, end):
     """This function will take in single product name and scrape images from ikea website
@@ -15,7 +16,7 @@ def scrape_images(product_name, start, end):
 
     url = f"https://w16804f45.api.esales.apptus.cloud/api/v1/panels/product-search?\
             sessionKey=695f7741-892e-4ff3-3cc2-db634b51be1c&customerKey=54fa9e75-8fdd-4af3-307f-72830c8b9e62&\
-            market=INEN&arg.window_first={start}&arg.window_last={end}&arg.search_phrase={product_name}s&\
+            market=INEN&arg.window_first={start}&arg.window_last={end}&arg.search_phrase={product_name}&\
             arg.sort_by=relevance%20desc&arg.catalog_root=category_catalog_inen%3A%27root%27&\
             arg.catalog_filter=type%3A%27functional%27%20OR%20type%3A%27products%27&\
             arg.nr_catalog_categories=3&arg.locale=en_IN&arg.filter=market%3A%27INEN%27"
@@ -38,7 +39,12 @@ def scrape_images(product_name, start, end):
 
 if __name__ == "__main__":
 
-    # add lighting to the list and remove ending 's' from the url
-    products = ['bed', 'chair', 'desk']
-    for product in products:
-        scrape_images(product, 1, 300)
+    @click.command()
+    @click.option('--scrape_all', '-a', is_flag=True, help='Scrape all product images')
+    def scrape_all_products(scrape_all):
+        if scrape_all:
+            products = ['bed', 'chair', 'desk', 'kitchen']
+            for product in products:
+                scrape_images(product, 1, 300)
+        else:
+            print("Nothing to scrape")
