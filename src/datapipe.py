@@ -20,11 +20,10 @@ def get_all_data_generators():
         train_datagen, val_datagen, test_datagen -- three datagenerators
         """
         random_seed(cfg.RANDOM_SEED, True)
-        data = (ImageList.from_folder(cfg.BASE_IMG_DIR+cfg.TRAIN_PATH)
-                .split_by_rand_pct(0.1)
-                .label_from_folder()
-                .transform(get_transforms(), size=224)
-                .add_test_folder(cfg.TEST_PATH)
-                .databunch())
+        data = ImageDataBunch.from_csv(path=cfg.BASE_IMG_DIR, folder=cfg.TRAIN_PATH, 
+                                      csv_labels=cfg.TRAIN_CSV_PATH, 
+                                      label_col=1, bs=32, test=cfg.TEST_PATH, 
+                                      ds_tfms=get_transforms(), size=224, num_workers=1).\
+                                      normalize(imagenet_stats)
 
         return data
