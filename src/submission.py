@@ -30,7 +30,7 @@ def generate_submission_df(model):
     Returns:
         dataframe -- submission dataframe
     """
-    image_name = pd.Series(os.listdir('data/test/'), name='image_name')
+    image_name = pd.Series(os.listdir('../data/test/'), name='image_name')
     label = predict_test(model)
     submission_df = pd.concat([image_name, label], axis=1)
     return submission_df
@@ -48,10 +48,14 @@ def save_submission_csv(submission_df, path):
 
 
 def validate_submission_csv(submission_df):
-    test_df = pd.read_csv('data/test.csv')
+    test_df = pd.read_csv('../data/test.csv')
     merge_df = pd.merge(test_df, submission_df, on='image_name')
     class_map = {'bed': 0, 'chair': 1, 'desk': 2, 'kitchen': 3}
     merge_df = merge_df.replace({'label_x': class_map})
 
     accuracy = (merge_df.label_x == merge_df.label_y).sum()/ merge_df.shape[0]
     return accuracy  
+
+
+if __name__=='__main__':
+    generate_and_save_submission_csv('with_imagenet_pretrained_resnet50', 'submissions/with_imagenet_pretrained_resnet50.csv')

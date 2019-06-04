@@ -14,14 +14,17 @@ def random_seed(seed_value, use_cuda):
         torch.backends.cudnn.benchmark = False
 
 def get_all_data_generators():
-    """Create data_generators for train, val and test with augmentations defined in src.augmentations
-    
-    Returns:
-        train_datagen, val_datagen, test_datagen -- three datagenerators
-    """
-    random_seed(cfg.RANDOM_SEED, True)
-    data = ImageDataBunch.from_folder(cfg.BASE_IMG_DIR, train= cfg.TRAIN_PATH, valid_pct= 0.1, test= cfg.TEST_PATH, bs=cfg.BATCH_SIZE,
-                                  ds_tfms=get_transforms(), size=cfg.IMAGE_DIMS, num_workers=1)\
-                                  .normalize(imagenet_stats)
+        """Create data_generators for train, val and test with augmentations defined in src.augmentations
 
-    return data
+        Returns:
+        train_datagen, val_datagen, test_datagen -- three datagenerators
+        """
+        random_seed(cfg.RANDOM_SEED, True)
+        data = (ImageList.from_folder(cfg.BASE_IMG_DIR+cfg.TRAIN_PATH)
+                .split_by_rand_pct(0.1)
+                .label_from_folder()
+                .transform(get_transforms(), size=224)
+                .add_test_folder(cfg.TEST_PATH)
+                .databunch())
+
+        return data

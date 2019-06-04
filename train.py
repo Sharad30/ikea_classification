@@ -10,7 +10,7 @@ def do_train():
     filepath = '../../models/'+cfg.EXPERIMENT_LABEL+'_'+cfg.BASE_MODEL
     data = get_all_data_generators()
     learn = classifier_pretrained(data, cfg.PRETRAINED_MODEL_PATH, cfg.PRETRAINED_MODEL)
-    callbacks = get_callbacks(learn)
+    callbacks = get_callbacks(learn, cfg.MIXUP_ALPHA)
     ImageFile.LOAD_TRUNCATED_IMAGES = True
     with progress_disabled_ctx(learn) as learn:
       learn.fit_one_cycle(cfg.EPOCHS, cfg.LEARNING_RATE, callbacks=callbacks)
