@@ -1,8 +1,11 @@
 EXPERIMENT_LABEL = "vgg1"
-TRAIN_PATH = 'train'
-TEST_PATH = 'test'
 
 BASE_IMG_DIR = 'data/'
+TRAIN_PATH = 'train'
+TRAIN_CSV = 'train.csv'
+TEST_PATH = 'test'
+
+
 RANDOM_SEED = 42
 
 PRETRAINED_IMAGENET = True
