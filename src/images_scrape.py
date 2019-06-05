@@ -50,14 +50,22 @@ def scrape_images(product_name, start, end):
                 f.write(requests.get(img_url).content)
                 print(f"Downloaded {i} {product_name} image successfully")
 
-if __name__ == "__main__":
 
-    @click.command()
-    @click.option('--scrape_all', '-a', is_flag=True, help='Scrape all product images')
-    def scrape_all_products(scrape_all):
-        if scrape_all:
-            products = ['bed', 'chair', 'desk', 'kitchen']
-            for product in products:
-                scrape_images(product, 1, 300)
-        else:
-            print("Nothing to scrape")
+@click.command()
+@click.option("--start", default=1, help="Image start index to fetch the corresponding \
+                image from the api.")
+@click.option("--end", default=100, help="Image end index to fetch the corresponding \
+                image from the api.")
+@click.option("--product", prompt="Which product image do you want to scrape",
+                help="The product images to scrape.")
+def scrape_all_products(start, end, product):
+    if product=='all':
+        products = ['bed', 'chair', 'desk', 'kitchen']
+        for product in products:
+            scrape_images(product, start, end)
+    else:
+        scrape_images(product, start, end)
+
+if __name__ == "__main__":
+    scrape_all_products()
+    
