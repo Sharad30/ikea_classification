@@ -5,7 +5,7 @@ import json
 import os
 import random
 import shutil
-
+import click
 
 def create_test_set():
     train_path = 'data/train'
@@ -52,8 +52,12 @@ def scrape_images(product_name, start, end):
 
 if __name__ == "__main__":
 
-    # products = ['kitchen']
-    # for product in products:
-    #     scrape_images(product, 1, 1353)
-
-    create_test_set()
+    @click.command()
+    @click.option('--scrape_all', '-a', is_flag=True, help='Scrape all product images')
+    def scrape_all_products(scrape_all):
+        if scrape_all:
+            products = ['bed', 'chair', 'desk', 'kitchen']
+            for product in products:
+                scrape_images(product, 1, 300)
+        else:
+            print("Nothing to scrape")

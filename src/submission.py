@@ -4,6 +4,7 @@ from src.datapipe import get_all_data_generators
 import pandas as pd
 import numpy as np
 import os
+import config.config as cfg
 
 
 def generate_and_save_submission_csv(model_path, submission_path):
@@ -30,9 +31,8 @@ def generate_submission_df(model):
     Returns:
         dataframe -- submission dataframe
     """
-    image_name = pd.Series(os.listdir('../data/test/'), name='image_name')
-    label = predict_test(model)
-    submission_df = pd.concat([image_name, label], axis=1)
+    submission_df = predict_test(model)
+    # submission_df = pd.concat([image_name, label], axis=1)
     return submission_df
 
 
@@ -48,7 +48,7 @@ def save_submission_csv(submission_df, path):
 
 
 def validate_submission_csv(submission_df):
-    test_df = pd.read_csv('../data/test.csv')
+    test_df = pd.read_csv('../data/V2/test_actual.csv')
     merge_df = pd.merge(test_df, submission_df, on='image_name')
     class_map = {'bed': 0, 'chair': 1, 'desk': 2, 'kitchen': 3}
     merge_df = merge_df.replace({'label_x': class_map})
